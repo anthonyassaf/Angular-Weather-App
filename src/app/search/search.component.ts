@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FavoritesService } from '../services/favorites.service';
 import { WeatherService } from '../services/weather.service';
 
@@ -16,9 +17,13 @@ export class SearchComponent implements OnInit {
   chart: any;
 
   constructor(private weatherservice: WeatherService, 
-    private favoritesService: FavoritesService) { }
+    private favoritesService: FavoritesService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(this.route.snapshot.paramMap.get('cityName')){
+      this.city = this.route.snapshot.paramMap.get('cityName');
+    }
     this.onClickSearch();
   }
 

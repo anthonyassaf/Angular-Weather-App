@@ -3,15 +3,12 @@
     <div class="col-12 col-sm-4" *ngFor="let item of weathers.entries()">
         <div class="widget">
             <div class="left-panel panel">
-                <div class="date">
-                    
-                </div>
                 <div class="city">
-                   {{ item[0] }}
+                   <a routerLink="/search/{{ item[0] }}">{{ item[0] }}</a>
                 </div>
                 <div class="temp">
                     <img  src="http://openweathermap.org/img/w/{{item[1]['weather'][0].icon}}.png" alt="">
-                    {{ item[1]['main'].temp | number : '1.0-0'}}&deg;
+                    {{ item[1]['main'].temp | number : '1.0-0'}}&deg;C
                 </div>
             </div>
         </div>
