@@ -1,10 +1,9 @@
-<div class="hero" data-bg-image="../../assets/images/banner.png">
+<div class="hero" style="background-image: url(https://wallpaperaccess.com/full/445458.jpg);">
     <div class="container">
-        <form action="#" class="find-location">
-            <input type="text" placeholder="Find your location...">
-            <input type="submit" value="Find">
+        <form class="find-location">
+            <input type="text" name="city" [(ngModel)]="city" placeholder="Find your location...">
+            <input type="submit" value="Find" (click)="onClickSearch()">
         </form>
-
     </div>
 </div>
 <div class="forecast-table">
@@ -12,92 +11,32 @@
         <div class="forecast-container">
             <div class="today forecast">
                 <div class="forecast-header">
-                    <div class="day">Monday</div>
+                    <div class="day">{{details[0].dt_txt | date:'fullDate'}}</div>
                     <div class="date">6 Oct</div>
                 </div> <!-- .forecast-header -->
                 <div class="forecast-content">
-                    <div class="location">New York</div>
+                    <div class="location">{{city}} , {{country}}</div>
                     <div class="degree">
-                        <div class="num">23<sup>o</sup>C</div>
+                        <div class="num">{{details[0]['main'].temp | number : '1.0-0'}}  <sup>o</sup>C</div>
                         <div class="forecast-icon">
-                            <img src="../../assets/images/icons/icon-1.svg" alt="" width=90>
+                            <img  src="http://openweathermap.org/img/w/{{details[0]['weather'][0].icon}}.png" alt="">
                         </div>	
                     </div>
-                    <span><img src="../../assets/images/icon-umberella.png" alt="">20%</span>
-                    <span><img src="../../assets/images/icon-wind.png" alt="">18km/h</span>
-                    <span><img src="../../assets/images/icon-compass.png" alt="">East</span>
+                    <span><img src="../../assets/images/icon-umberella.png" alt="">{{details[0]['main'].humidity}} %</span> <!-- I should change the icon-->
+                    <span><img src="../../assets/images/icon-wind.png" alt="">{{details[0]['wind'].speed}} m/s</span>
+                    <span><img src="../../assets/images/icon-compass.png" alt="">{{details[0]['main'].pressure}}  hPa</span>
                 </div>
             </div>
-            <div class="forecast">
+            <div class="forecast"  *ngFor="let item of details">
                 <div class="forecast-header">
-                    <div class="day">Tuesday</div>
+                    <div class="day">{{item.dt_txt | date:'fullDate'}}</div>
                 </div> <!-- .forecast-header -->
                 <div class="forecast-content">
                     <div class="forecast-icon">
-                        <img src="../../assets/images/icons/icon-3.svg" alt="" width=48>
+                        <img  src="http://openweathermap.org/img/w/{{item['weather'][0].icon}}.png" alt="">
                     </div>
-                    <div class="degree">23<sup>o</sup>C</div>
-                    <small>18<sup>o</sup></small>
-                </div>
-            </div>
-            <div class="forecast">
-                <div class="forecast-header">
-                    <div class="day">Wednesday</div>
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <div class="forecast-icon">
-                        <img src="../../assets/images/icons/icon-5.svg" alt="" width=48>
-                    </div>
-                    <div class="degree">23<sup>o</sup>C</div>
-                    <small>18<sup>o</sup></small>
-                </div>
-            </div>
-            <div class="forecast">
-                <div class="forecast-header">
-                    <div class="day">Thursday</div>
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <div class="forecast-icon">
-                        <img src="../../assets/images/icons/icon-7.svg" alt="" width=48>
-                    </div>
-                    <div class="degree">23<sup>o</sup>C</div>
-                    <small>18<sup>o</sup></small>
-                </div>
-            </div>
-            <div class="forecast">
-                <div class="forecast-header">
-                    <div class="day">Friday</div>
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <div class="forecast-icon">
-                        <img src="../../assets/images/icons/icon-12.svg" alt="" width=48>
-                    </div>
-                    <div class="degree">23<sup>o</sup>C</div>
-                    <small>18<sup>o</sup></small>
-                </div>
-            </div>
-            <div class="forecast">
-                <div class="forecast-header">
-                    <div class="day">Saturday</div>
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <div class="forecast-icon">
-                        <img src="../../assets/images/icons/icon-13.svg" alt="" width=48>
-                    </div>
-                    <div class="degree">23<sup>o</sup>C</div>
-                    <small>18<sup>o</sup></small>
-                </div>
-            </div>
-            <div class="forecast">
-                <div class="forecast-header">
-                    <div class="day">Sunday</div>
-                </div> <!-- .forecast-header -->
-                <div class="forecast-content">
-                    <div class="forecast-icon">
-                        <img src="../../assets/images/icons/icon-14.svg" alt="" width=48>
-                    </div>
-                    <div class="degree">23<sup>o</sup>C</div>
-                    <small>18<sup>o</sup></small>
+                    <div class="degree">{{item['main'].temp_max}}<sup>o</sup>C</div>
+                    <small>{{item['main'].temp_min}}<sup>o</sup></small>
                 </div>
             </div>
         </div>
