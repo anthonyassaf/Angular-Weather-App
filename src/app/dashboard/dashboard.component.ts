@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FavoritesService } from '../services/favorites.service';
 import { WeatherService } from '../services/weather.service';
 
 @Component({
@@ -9,29 +10,29 @@ import { WeatherService } from '../services/weather.service';
 export class DashboardComponent implements OnInit {
 
   title = 'Weather Application';
-  city = "Beirut";
+  cities: string[];
   country: string;
   details = [];
+  weathers = new Map<string, []>();
   chart: any;
-
-  constructor(private weatherservice: WeatherService) {}
+  
+  constructor(private weatherservice: WeatherService, private favoritesService: FavoritesService) {}
 
   ngOnInit(): void {
-    this.onClickSearch();
+    this.getCities();
+    this.setWeathers();
   }
 
-  onClickSearch(){
-    this.details = [];
-    this.weatherservice.getWeatherDetails(this.city).subscribe((data) => {
-      console.log(data);
-      // this.details=data['list'];
-      //filtering the five days forecast
-      for (let i = 0; i < data['list'].length; i += 8) {
-        this.details.push(data['list'][i]);
-      }
-      this.city = data['city'].name;
-      this.country = data['city'].country;
-    });
+  setWeathers(){
+    for(let i=0;i<this.cities.length;i++){
+      console.log(this.cities[i]);
+      this.weatherservice.getWeatherDetails(this.cities[i]).subscribe((data) => {
+        this.weathers.set(this.cities[i], data['list'][0]);
+      });
+    }
   }
 
+  getCities(){
+    this.cities = this.favoritesService.getCities();
+  }
 }

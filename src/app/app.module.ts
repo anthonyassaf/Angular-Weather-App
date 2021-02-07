@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { WeatherService } from './services/weather.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FavoritesService } from './services/favorites.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    WeatherService
+    WeatherService,
+    FavoritesService
   ],
   bootstrap: [AppComponent]
 })

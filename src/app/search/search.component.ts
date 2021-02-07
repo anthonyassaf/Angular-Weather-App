@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FavoritesService } from '../services/favorites.service';
 import { WeatherService } from '../services/weather.service';
 
 @Component({
@@ -14,13 +15,14 @@ export class SearchComponent implements OnInit {
   details = [];
   chart: any;
 
-  constructor(private weatherservice: WeatherService) {}
+  constructor(private weatherservice: WeatherService, 
+    private favoritesService: FavoritesService) { }
 
   ngOnInit(): void {
     this.onClickSearch();
   }
 
-  onClickSearch(){
+  onClickSearch() {
     this.details = [];
     this.weatherservice.getWeatherDetails(this.city).subscribe((data) => {
       console.log(data);
@@ -32,6 +34,10 @@ export class SearchComponent implements OnInit {
       this.city = data['city'].name;
       this.country = data['city'].country;
     });
+  }
+
+  onClickFavorite() {
+    this.favoritesService.addFavorite(this.city);
   }
 
 }

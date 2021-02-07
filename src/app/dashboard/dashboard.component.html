@@ -1,80 +1,17 @@
-<div class="row" style="background-image: url(https://wallpaperaccess.com/full/445458.jpg); background-repeat: no-repeat; background-size:cover;">
-    <div class="col-12 col-sm-4">
-        <div class="widget">         
+<div class="row"
+    style="background-image: url(https://wallpaperaccess.com/full/445458.jpg); background-repeat: no-repeat; background-size:cover;">
+    <div class="col-12 col-sm-4" *ngFor="let item of weathers.entries()">
+        <div class="widget">
             <div class="left-panel panel">
                 <div class="date">
-                    Monday, 20 Aug 2018
+                    
                 </div>
                 <div class="city">
-                    Mumbai
+                   {{ item[0] }}
                 </div>
                 <div class="temp">
-                   <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="60">
-                   27&deg;
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-4">
-        <div class="widget">         
-            <div class="left-panel panel">
-                <div class="date">
-                    Monday, 20 Aug 2018
-                </div>
-                <div class="city">
-                    Mumbai
-                </div>
-                <div class="temp">
-                   <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="60">
-                   27&deg;
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-4">
-        <div class="widget">         
-            <div class="left-panel panel">
-                <div class="date">
-                    Monday, 20 Aug 2018
-                </div>
-                <div class="city">
-                    Mumbai
-                </div>
-                <div class="temp">
-                   <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="60">
-                   27&deg;
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-4">
-        <div class="widget">         
-            <div class="left-panel panel">
-                <div class="date">
-                    Monday, 20 Aug 2018
-                </div>
-                <div class="city">
-                    Mumbai
-                </div>
-                <div class="temp">
-                   <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="60">
-                   27&deg;
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-4">
-        <div class="widget">         
-            <div class="left-panel panel">
-                <div class="date">
-                    Monday, 20 Aug 2018
-                </div>
-                <div class="city">
-                    Mumbai
-                </div>
-                <div class="temp">
-                   <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="60">
-                   27&deg;
+                    <img  src="http://openweathermap.org/img/w/{{item[1]['weather'][0].icon}}.png" alt="">
+                    {{ item[1]['main'].temp | number : '1.0-0'}}&deg;
                 </div>
             </div>
         </div>
